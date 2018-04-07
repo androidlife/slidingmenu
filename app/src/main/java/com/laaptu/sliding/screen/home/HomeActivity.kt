@@ -1,4 +1,4 @@
-package com.laaptu.sliding
+package com.laaptu.sliding.screen.home
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -6,10 +6,13 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.laaptu.sliding.R
+import com.laaptu.sliding.model.Location
+import com.laaptu.sliding.screen.map.MapActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +26,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        val location = Location(-33.6883393, 151.1021816, "Asquith")
+        startActivity(MapActivity.getLaunchingIntent(this, location))
     }
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

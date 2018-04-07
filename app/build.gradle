@@ -20,14 +20,51 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "assignment"
+    productFlavors {
+        RELEASE_ {
+            dimension "assignment"
+            applicationIdSuffix ".release"
+        }
+        DEBUG_ {
+            dimension "assignment"
+            applicationIdSuffix ".debug"
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "com.android.support:support-fragment:$supportlib_version"
+        force "com.android.support:support-annotations:$supportlib_version"
+    }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$supportlib_version"
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.google.android.gms:play-services-maps:12.0.0'
+    //for http methods
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    // for use of Rx observable on return types
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    //for Rx java use
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
