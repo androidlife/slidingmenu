@@ -8,13 +8,17 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.laaptu.sliding.R
 import com.laaptu.sliding.screen.home.places.PlacesFragment
+import com.laaptu.sliding.screen.home.places.ViewStatePlaces
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.home_content.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var selectedIndex: Int = R.id.nav_location
-    private val SELECTED_INDEX = "SelectedIndex"
+    private var selectedIndex: Int = R.id.nav_location
+
+    private var viewStatePlaces = ViewStatePlaces()
+    private var viewStateListener: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         if (savedInstanceState != null) {
             selectedIndex = savedInstanceState.getInt(SELECTED_INDEX, R.id.nav_gallery)
+            viewStatePlaces = savedInstanceState.getParcelable(VIEW_STATE_PLACES)
         }
         changeSelectedIndex(selectedIndex, true)
         navigationView.setNavigationItemSelectedListener(this)
@@ -49,7 +54,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportActionBar?.title = getString(R.string.places)
                 if (supportFragmentManager.findFragmentByTag(fragTag) == null)
                     supportFragmentManager.beginTransaction().replace(
-                            R.id.container, PlacesFragment(), fragTag
+                            R.id.container, PlacesFragment.getInstance(viewStatePlaces), fragTag
                     ).commit()
                 if (setSelectedMenu)
                     navigationView.setCheckedItem(R.id.nav_location)
@@ -61,6 +66,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putInt(SELECTED_INDEX, selectedIndex)
+        outState?.putParcelable(VIEW_STATE_PLACES, viewStatePlaces)
     }
 
 
@@ -78,4 +84,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+
 }

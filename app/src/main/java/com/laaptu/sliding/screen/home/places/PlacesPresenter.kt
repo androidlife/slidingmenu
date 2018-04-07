@@ -12,20 +12,20 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
         }
     }
 
-    private fun initViewState(viewState: ViewState) {
+    private fun initViewState(viewStatePlaces: ViewStatePlaces) {
         view.showLoadedViews(false)
-        when (viewState.state) {
-            ViewState.StateEmpty -> fetchPlaces()
-            ViewState.StateLoaded -> {
+        when (viewStatePlaces.state) {
+            ViewStatePlaces.StateEmpty -> fetchPlaces()
+            ViewStatePlaces.StateLoaded -> {
                 onPlacesFetched(view.getViewState().data)
                 view.selectItemAt(view.getViewState().selectedIndex)
             }
-            ViewState.StateError -> setViewError(null)
+            ViewStatePlaces.StateError -> setViewError(null)
         }
     }
 
     private fun fetchPlaces() {
-        if (view.getViewState().state != ViewState.StateEmpty)
+        if (view.getViewState().state != ViewStatePlaces.StateEmpty)
             return
         if (!view.isConnectedToNetwork()) {
             setViewError("No Internet Connection")
@@ -49,7 +49,7 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
     }
 
     override fun retry() {
-        setViewState(ViewState.StateEmpty)
+        setViewState(ViewStatePlaces.StateEmpty)
         fetchPlaces()
     }
 
@@ -76,7 +76,7 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
         view.showError(true)
         if (errorMsg != null)
             view.showInfo(errorMsg)
-        setViewState(ViewState.StateError)
+        setViewState(ViewStatePlaces.StateError)
     }
 
     private fun onPlacesFetched(places: List<Place>?) {
@@ -91,7 +91,7 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
             view.showLoadedViews(true)
         }
         view.setData(places!!)
-        setViewState(ViewState.StateLoaded)
+        setViewState(ViewStatePlaces.StateLoaded)
     }
 
 

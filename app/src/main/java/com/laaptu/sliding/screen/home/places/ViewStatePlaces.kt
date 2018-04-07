@@ -6,9 +6,9 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class ViewState(var state: Int = StateEmpty,
-                     var selectedIndex: Int = 0,
-                     var data: List<Place>? = null) : Parcelable {
+data class ViewStatePlaces(var state: Int = StateEmpty,
+                           var selectedIndex: Int = 0,
+                           var data: List<Place>? = null) : Parcelable {
     companion object {
         val StateEmpty: Int = 0x1
         val StateError: Int = 0x2

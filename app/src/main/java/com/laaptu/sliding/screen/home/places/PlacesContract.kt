@@ -2,7 +2,6 @@ package com.laaptu.sliding.screen.home.places
 
 import com.laaptu.sliding.model.Error
 import com.laaptu.sliding.model.FromCentral
-import com.laaptu.sliding.model.Location
 import com.laaptu.sliding.model.Place
 
 interface PlacesContract {
@@ -11,7 +10,7 @@ interface PlacesContract {
         fun showProgress(show: Boolean)
         fun showLoadedViews(show: Boolean)
         fun showError(show: Boolean)
-        fun getViewState(): ViewState
+        fun getViewState(): ViewStatePlaces
         fun isConnectedToNetwork(): Boolean
         fun setData(places: List<Place>)
         fun showInfo(info: String)

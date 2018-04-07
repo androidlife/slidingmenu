@@ -12,21 +12,39 @@ import au.com.sentia.test.network.provider.ApiManager
 import com.laaptu.sliding.R
 import com.laaptu.sliding.model.FromCentral
 import com.laaptu.sliding.model.Place
+import com.laaptu.sliding.screen.home.VIEW_STATE_PLACES
 import com.laaptu.sliding.screen.map.MapActivity
 import kotlinx.android.synthetic.main.fragment_places.*
 import android.view.View as View_
 
 class PlacesFragment : Fragment(), PlacesContract.View, AdapterView.OnItemSelectedListener {
 
+    companion object {
+        fun getInstance(viewStatePlaces: ViewStatePlaces): PlacesFragment {
+            val placesFragment = PlacesFragment()
+            val params = Bundle()
+            params.putParcelable(VIEW_STATE_PLACES, viewStatePlaces)
+            placesFragment.arguments = params
+            return placesFragment
+        }
+
+        fun getViewState(bundle: Bundle?): ViewStatePlaces {
+            if (bundle != null && bundle.containsKey(VIEW_STATE_PLACES))
+                return bundle.getParcelable(VIEW_STATE_PLACES)
+            return ViewStatePlaces()
+        }
+    }
+
 
     private var loadedViews: List<View> = ArrayList<View>()
-    private var viewState: ViewState = ViewState()
+    private var viewState: ViewStatePlaces = ViewStatePlaces()
     private lateinit var presenter: PlacesContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
         presenter = PlacesPresenter(this, PlacesModel(ApiManager.apiService))
+        viewState = getViewState(arguments)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -82,7 +100,7 @@ class PlacesFragment : Fragment(), PlacesContract.View, AdapterView.OnItemSelect
         Toast.makeText(context, info, Toast.LENGTH_SHORT).show()
     }
 
-    override fun getViewState(): ViewState {
+    override fun getViewState(): ViewStatePlaces {
         return viewState
     }
 
@@ -122,6 +140,10 @@ class PlacesFragment : Fragment(), PlacesContract.View, AdapterView.OnItemSelect
 
     override fun selectItemAt(index: Int) {
         spinnerPlaces.setSelection(index)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 
