@@ -19,19 +19,27 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         val EXTRAS_LOCATION = "Location"
-        fun getLaunchingIntent(context: Context, location: Location): Intent {
+        val EXTRAS_LOCATION_NAME = "LocationName"
+        fun getLaunchingIntent(context: Context, location: Location, locationName: String): Intent {
             val intent = Intent(context, MapActivity::class.java)
-            addLocationIntent(intent, location)
+            addLocationIntent(intent, location, locationName)
             return intent
         }
 
-        fun addLocationIntent(intent: Intent, location: Location) {
+        fun addLocationIntent(intent: Intent, location: Location, locationName: String) {
             intent.putExtra(EXTRAS_LOCATION, location)
+            intent.putExtra(EXTRAS_LOCATION_NAME, locationName)
         }
 
         private fun getLocation(intent: Intent): Location? {
             if (intent.hasExtra(EXTRAS_LOCATION))
                 return intent.getParcelableExtra(EXTRAS_LOCATION)
+            return null
+        }
+
+        private fun getLocationName(intent: Intent): String? {
+            if (intent.hasExtra(EXTRAS_LOCATION_NAME))
+                return intent.getStringExtra(EXTRAS_LOCATION_NAME)
             return null
         }
     }
@@ -41,11 +49,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.mapFragment) as SupportMapFragment
     }
     private var location: Location? = null
+    private var locationName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
         location = getLocation(intent)
+        locationName = getLocationName(intent)
         if (location == null) {
             finish()
             return
@@ -56,7 +66,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun initActionBar() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = location!!.locationName
+        supportActionBar?.title = locationName
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -68,7 +78,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         val latLng = LatLng(location!!.latitude, location!!.longitude)
-        googleMap?.addMarker(MarkerOptions().position(latLng).title(location!!.locationName))
+        googleMap?.addMarker(MarkerOptions().position(latLng).title(locationName))
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
     }
 

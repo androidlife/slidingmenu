@@ -1,25 +1,18 @@
 package com.laaptu.sliding.screen
 
-import android.app.Instrumentation
 import android.content.Intent
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso
 import android.support.test.espresso.IdlingPolicies
 import android.support.test.espresso.IdlingRegistry
-import android.support.test.espresso.assertion.ViewAssertions
-import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.laaptu.sliding.model.Location
 import com.laaptu.sliding.screen.map.MapActivity
 import com.laaptu.sliding.utils.CustomIdlingResource
 import org.junit.After
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
@@ -49,16 +42,12 @@ class MapActivityTest {
 
     @Test
     fun mapLoadSuccess() {
-        val location = Location(-33.6883393, 151.1021816, "Asquith")
+        val location = Location(-33.6883393, 151.1021816)
         val intent = Intent()
-        MapActivity.addLocationIntent(intent, location)
+        MapActivity.addLocationIntent(intent, location, "Asquith")
         activityTestRule.launchActivity(intent)
         idlingResource = CustomIdlingResource()
         IdlingRegistry.getInstance().register(idlingResource)
         idlingResource?.startCountdown(TIMEOUT_LOAD, TIMEOUT_UNIT)
-        Espresso.onView(ViewMatchers.withContentDescription(location.locationName.plus("."))).check(
-                ViewAssertions.matches(ViewMatchers.isDisplayed())
-        )
-
     }
 }
