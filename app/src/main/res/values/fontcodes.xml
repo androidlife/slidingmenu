@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="icon_location">&#xf3c5;</string>
+    <string name="icon_train">&#xf238;</string>
+    <string name="icon_car">&#xf1b9;</string>
+</resources>

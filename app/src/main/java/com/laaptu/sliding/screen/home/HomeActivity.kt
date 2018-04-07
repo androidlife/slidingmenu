@@ -7,12 +7,13 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.laaptu.sliding.R
+import com.laaptu.sliding.screen.home.places.PlacesFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.home_content.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var selectedIndex: Int = R.id.nav_gallery
+    var selectedIndex: Int = R.id.nav_location
     private val SELECTED_INDEX = "SelectedIndex"
 
     override fun onCreate(savedInstanceState: Bundle?) {
