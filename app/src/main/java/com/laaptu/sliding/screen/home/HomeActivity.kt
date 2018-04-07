@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.laaptu.sliding.R
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.home_content.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,7 +37,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (newIndex) {
             R.id.nav_gallery -> {
                 supportActionBar?.title = getString(R.string.gallery)
-
                 if (supportFragmentManager.findFragmentByTag(fragTag) == null)
                     supportFragmentManager.beginTransaction().replace(
                             R.id.container, GalleryFragment(), fragTag
