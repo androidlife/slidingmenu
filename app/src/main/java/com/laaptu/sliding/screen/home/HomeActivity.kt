@@ -2,6 +2,7 @@ package com.laaptu.sliding.screen.home
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -16,9 +17,7 @@ import kotlinx.android.synthetic.main.home_content.*
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var selectedIndex: Int = R.id.nav_location
-
     private var viewStatePlaces = ViewStatePlaces()
-    private var viewStateListener: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +30,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         if (savedInstanceState != null) {
-            selectedIndex = savedInstanceState.getInt(SELECTED_INDEX, R.id.nav_gallery)
+            selectedIndex = savedInstanceState.getInt(SELECTED_INDEX)
             viewStatePlaces = savedInstanceState.getParcelable(VIEW_STATE_PLACES)
         }
         changeSelectedIndex(selectedIndex, true)
@@ -79,10 +78,25 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if (selectedIndex != item.itemId)
+        if (selectedIndex != item.itemId) {
+            saveFragmentState(selectedIndex)
             changeSelectedIndex(item.itemId, false)
+        }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveFragmentState(selectedIndex)
+    }
+
+    private fun saveFragmentState(fragId: Int) {
+        val fragment = supportFragmentManager.findFragmentByTag(fragId.toString()) ?: return
+        when (fragId) {
+            R.id.nav_location -> viewStatePlaces = (fragment as PlacesFragment).getViewState().copy()
+        }
+
     }
 
 
