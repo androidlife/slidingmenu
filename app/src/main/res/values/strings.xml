@@ -4,4 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="google_maps_key">AIzaSyB9ceKdWY6MfUi0Od1uEij7tph5PVPVU-A</string>
+    <string name="gallery">Gallery</string>
+    <string name="places">Places</string>
 </resources>
