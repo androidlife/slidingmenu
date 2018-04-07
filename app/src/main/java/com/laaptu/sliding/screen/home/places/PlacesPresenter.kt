@@ -1,5 +1,6 @@
 package com.laaptu.sliding.screen.home.places
 
+import com.laaptu.sliding.model.EMPTY_PLACE_ID
 import com.laaptu.sliding.model.Error
 import com.laaptu.sliding.model.Place
 
@@ -12,8 +13,11 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
     }
 
     private fun initViewState(viewState: ViewState) {
+        view.showLoadedViews(false)
         when (viewState.state) {
             ViewState.StateEmpty -> fetchPlaces()
+            ViewState.StateLoaded -> onPlacesFetched(view.getViewState().data)
+            ViewState.StateError -> setViewError(null)
         }
     }
 
@@ -45,31 +49,46 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
         fetchPlaces()
     }
 
-    fun setViewState(viewState: Int) {
+    private fun setViewState(viewState: Int) {
         view.getViewState().state = viewState
     }
 
     override fun onItemSelected(index: Int) {
+        view.getViewState().selectedIndex = index
+        val selectedPlace = view.getViewState().data?.get(index)
+        if (selectedPlace?.id == EMPTY_PLACE_ID)
+            return
+        view.onPlaceSelected(selectedPlace?.fromCentral)
     }
 
-    fun setViewError(errorMsg: String) {
+    override fun showMapIntent() {
+        val selectedPlace = view.getViewState().data?.get(view.getViewState().selectedIndex)
+        if (selectedPlace != null)
+            view.showMap(selectedPlace)
+    }
+
+    fun setViewError(errorMsg: String?) {
         view.showProgress(false)
         view.showError(true)
-        view.showInfo(errorMsg)
+        if (errorMsg != null)
+            view.showInfo(errorMsg)
         setViewState(ViewState.StateError)
     }
 
-    fun onPlacesFetched(places: List<Place>) {
+    fun onPlacesFetched(places: List<Place>?) {
         view.showProgress(false)
-        if (places.isEmpty()) {
+        if (places!!.isEmpty()) {
             view.showInfo("No places found")
+            val empty = listOf<Place>(model.getEmptyPlace())
+            view.getViewState().data = empty
+        } else {
+            view.getViewState().data = places
+            view.showLoadedViews(true)
         }
-        view.getViewState().data = places
-        view.setData(places)
-        view.showLoadedViews(true)
+        view.setData(places!!)
         onItemSelected(0)
         setViewState(ViewState.StateLoaded)
-
     }
+
 
 }

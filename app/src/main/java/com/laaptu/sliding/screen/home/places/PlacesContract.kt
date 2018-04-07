@@ -1,6 +1,8 @@
 package com.laaptu.sliding.screen.home.places
 
 import com.laaptu.sliding.model.Error
+import com.laaptu.sliding.model.FromCentral
+import com.laaptu.sliding.model.Location
 import com.laaptu.sliding.model.Place
 
 interface PlacesContract {
@@ -10,22 +12,25 @@ interface PlacesContract {
         fun showLoadedViews(show: Boolean)
         fun showError(show: Boolean)
         fun getViewState(): ViewState
-        fun setViewState(viewViewState: ViewState)
         fun isConnectedToNetwork(): Boolean
-        fun onItemSelected(index: Int)
         fun setData(places: List<Place>)
         fun showInfo(info: String)
+        fun onPlaceSelected(fromCentral: FromCentral?)
+        fun showMap(place:Place)
     }
 
     interface Presenter {
         fun start(start: Boolean)
         fun retry()
         fun onItemSelected(index: Int)
+        fun showMapIntent()
+
     }
 
     interface Model {
         fun cancel(cancel: Boolean)
         fun fetchPlaces(listener: OnPlaceFetchListener)
+        fun getEmptyPlace(): Place
     }
 
 

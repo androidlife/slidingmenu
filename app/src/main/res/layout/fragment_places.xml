@@ -21,7 +21,7 @@
         android:layout_height="56dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:text="Tap to Retry!" />
+        android:text="@string/tap_to_retry" />
 
     <ProgressBar
         android:id="@+id/pb"
@@ -34,16 +34,19 @@
         android:id="@+id/dividerFirst"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:background="@color/divider"
         app:layout_constraintTop_toBottomOf="@id/spinnerPlaces" />
 
-    <TextView
+    <com.laaptu.sliding.widgets.IconicTextView
         android:id="@+id/txtTransportInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
+        android:layout_marginStart="6dp"
+        android:textSize="17sp"
         app:layout_constraintTop_toBottomOf="@id/dividerFirst"
+        app:layout_constraintLeft_toLeftOf="parent"
         tools:text="Mode of Transport :\n" />
 
     <View

@@ -11,6 +11,6 @@ class SimpleFetchTest {
         assertTrue(places != null && places.size == 3 && places[0].id == 1L)
         val place = places[0]
         assertTrue(place.locationName.equals("Blue Mountains")
-                && place.location.latitude == -33.7181)
+                && place.location?.latitude == -33.7181)
     }
 }

@@ -1,5 +1,7 @@
 package com.laaptu.sliding.screen.home.places
 
+import com.laaptu.sliding.model.EMPTY_PLACE_ID
+import com.laaptu.sliding.model.EMPTY_PLACE_NAME
 import com.laaptu.sliding.model.Error
 import com.laaptu.sliding.model.Place
 import com.laaptu.sliding.network.ApiService
@@ -8,6 +10,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class PlacesModel(private val apiService: ApiService) : PlacesContract.Model {
+
+
     private var cancel: Boolean = false
     private var apiCallback: Disposable? = null
     override fun cancel(cancel: Boolean) {
@@ -33,6 +37,10 @@ class PlacesModel(private val apiService: ApiService) : PlacesContract.Model {
         if (cancel)
             return
         listener.onFetchFailure(error)
+    }
+
+    override fun getEmptyPlace(): Place {
+        return Place(EMPTY_PLACE_ID, EMPTY_PLACE_NAME)
     }
 
 }
