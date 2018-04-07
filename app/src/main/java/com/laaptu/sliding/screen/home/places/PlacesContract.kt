@@ -16,7 +16,8 @@ interface PlacesContract {
         fun setData(places: List<Place>)
         fun showInfo(info: String)
         fun onPlaceSelected(fromCentral: FromCentral?)
-        fun showMap(place:Place)
+        fun showMap(place: Place)
+        fun selectItemAt(index: Int)
     }
 
     interface Presenter {

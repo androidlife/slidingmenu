@@ -120,5 +120,9 @@ class PlacesFragment : Fragment(), PlacesContract.View, AdapterView.OnItemSelect
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
+    override fun selectItemAt(index: Int) {
+        spinnerPlaces.setSelection(index)
+    }
+
 
 }

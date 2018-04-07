@@ -16,7 +16,10 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
         view.showLoadedViews(false)
         when (viewState.state) {
             ViewState.StateEmpty -> fetchPlaces()
-            ViewState.StateLoaded -> onPlacesFetched(view.getViewState().data)
+            ViewState.StateLoaded -> {
+                onPlacesFetched(view.getViewState().data)
+                view.selectItemAt(view.getViewState().selectedIndex)
+            }
             ViewState.StateError -> setViewError(null)
         }
     }
@@ -35,6 +38,7 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
         model.fetchPlaces(object : PlacesContract.OnPlaceFetchListener {
             override fun onFetchSuccess(places: List<Place>) {
                 onPlacesFetched(places)
+                onItemSelected(0)
             }
 
             override fun onFetchFailure(error: Error) {
@@ -75,8 +79,9 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
         setViewState(ViewState.StateError)
     }
 
-    fun onPlacesFetched(places: List<Place>?) {
+    private fun onPlacesFetched(places: List<Place>?) {
         view.showProgress(false)
+        view.showError(false)
         if (places!!.isEmpty()) {
             view.showInfo("No places found")
             val empty = listOf<Place>(model.getEmptyPlace())
@@ -86,7 +91,6 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
             view.showLoadedViews(true)
         }
         view.setData(places!!)
-        onItemSelected(0)
         setViewState(ViewState.StateLoaded)
     }
 
