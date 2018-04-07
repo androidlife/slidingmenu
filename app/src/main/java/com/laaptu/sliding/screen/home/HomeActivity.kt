@@ -26,8 +26,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-        val location = Location(-33.6883393, 151.1021816)
-        startActivity(MapActivity.getLaunchingIntent(this, location,"Asquith"))
     }
 
 
