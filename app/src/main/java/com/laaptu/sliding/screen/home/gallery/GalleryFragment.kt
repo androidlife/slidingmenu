@@ -90,6 +90,8 @@ class GalleryFragment : Fragment(), ViewPager.OnPageChangeListener {
         layoutParams.height = newHeight
         vpGallery.adapter = StoriesAdapter(fragmentManager, getAllStories())
         vpGallery.addOnPageChangeListener(this)
+
+        vpIndicator.setViewPager(vpGallery)
     }
 
 
