@@ -14,6 +14,7 @@ object ApiManager {
     private val retrofit: Retrofit
     val apiService: ApiService
         get() = retrofit.create(ApiService::class.java)
+
     init {
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
         builder.connectTimeout(1, TimeUnit.MINUTES)

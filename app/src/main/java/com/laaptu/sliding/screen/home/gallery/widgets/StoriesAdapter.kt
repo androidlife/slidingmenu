@@ -10,6 +10,7 @@ class StoriesAdapter(fm: FragmentManager, private val stories: List<Story>) : Fr
     override fun getItem(position: Int): Fragment {
         return StoryFragment.getInstance(stories[position])
     }
+
     override fun getCount(): Int {
         return stories.size
     }

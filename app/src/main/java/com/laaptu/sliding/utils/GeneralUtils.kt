@@ -3,9 +3,9 @@ package com.laaptu.sliding.utils
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.DisplayMetrics
 import com.laaptu.sliding.R
 import com.laaptu.sliding.model.Offer
-import android.util.DisplayMetrics
 import com.laaptu.sliding.model.Story
 
 

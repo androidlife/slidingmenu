@@ -1,6 +1,5 @@
 package com.laaptu.sliding.utils
 
-import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction

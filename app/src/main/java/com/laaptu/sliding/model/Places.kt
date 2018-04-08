@@ -9,7 +9,7 @@ data class Location(@SerializedName("latitude") val latitude: Double,
                     @SerializedName("longitude") val longitude: Double) : Parcelable
 
 @Parcelize
-data class FromCentral(@SerializedName("car") val byCar: String =" ",
+data class FromCentral(@SerializedName("car") val byCar: String = " ",
                        @SerializedName("train") val byTrain: String = " ") : Parcelable
 
 @Parcelize
