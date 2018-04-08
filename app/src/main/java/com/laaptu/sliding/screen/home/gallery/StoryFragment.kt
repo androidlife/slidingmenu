@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.laaptu.sliding.R
 import com.laaptu.sliding.model.Story
 import com.laaptu.sliding.screen.home.DEAL_DATA
@@ -35,6 +36,6 @@ class StoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val story = getStory(arguments) ?: return
         ivStory.setImageResource(story.imgResId)
-        ivStory.setOnClickListener { println(story.title) }
+        ivStory.setOnClickListener { Toast.makeText(activity, story.title, Toast.LENGTH_SHORT).show() }
     }
 }
