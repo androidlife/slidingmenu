@@ -84,13 +84,13 @@ class PlacesPresenter(val view: PlacesContract.View, val model: PlacesContract.M
         view.showError(false)
         if (places!!.isEmpty()) {
             view.showInfo("No places found")
-            val empty = listOf<Place>(model.getEmptyPlace())
+            val empty = listOf(model.getEmptyPlace())
             view.getViewState().data = empty
         } else {
             view.getViewState().data = places
             view.showLoadedViews(true)
         }
-        view.setData(places!!)
+        view.setData(places)
         setViewState(ViewStatePlaces.StateLoaded)
     }
 

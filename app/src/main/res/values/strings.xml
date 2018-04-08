@@ -9,8 +9,6 @@
     <string name="location">Location</string>
 
     <string name="mode_of_transport">Mode Of Transport: </string>
-    <string name="mode_car">Car</string>
-    <string name="mode_train">Train</string>
     <string name="tap_to_retry">Tap to Retry!</string>
     <string name="stories">Stories</string>
     <string name="discount_movie_tickets">Discount Movie Tickets</string>

@@ -36,7 +36,7 @@ class PlacesFragment : Fragment(), PlacesContract.View, AdapterView.OnItemSelect
     }
 
 
-    private var loadedViews: List<View> = ArrayList<View>()
+    private var loadedViews: List<View> = ArrayList()
     private var viewState: ViewStatePlaces = ViewStatePlaces()
     private lateinit var presenter: PlacesContract.Presenter
 
@@ -140,10 +140,6 @@ class PlacesFragment : Fragment(), PlacesContract.View, AdapterView.OnItemSelect
 
     override fun selectItemAt(index: Int) {
         spinnerPlaces.setSelection(index)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
 

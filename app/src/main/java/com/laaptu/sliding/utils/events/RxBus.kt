@@ -11,6 +11,6 @@ object RxBus {
     }
 
     fun toObservable(): Observable<Any> {
-        return eventBus;
+        return eventBus
     }
 }

@@ -18,8 +18,8 @@ import com.laaptu.sliding.model.Location
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
-        val EXTRAS_LOCATION = "Location"
-        val EXTRAS_LOCATION_NAME = "LocationName"
+        private val EXTRAS_LOCATION = "Location"
+        private val EXTRAS_LOCATION_NAME = "LocationName"
         fun getLaunchingIntent(context: Context, location: Location, locationName: String): Intent {
             val intent = Intent(context, MapActivity::class.java)
             addLocationIntent(intent, location, locationName)
