@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="offer_image_width">290dp</dimen>
+    <dimen name="offer_image_height">114dp</dimen>
+</resources>

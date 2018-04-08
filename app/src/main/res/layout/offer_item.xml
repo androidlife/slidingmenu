@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/offer_image_width"
+    android:layout_height="@dimen/offer_image_height">
+
+    <ImageView
+        android:id="@+id/ivOffer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/offer_title_bg"
+        android:ellipsize="end"
+        android:gravity="center_vertical|left"
+        android:maxLines="1"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        tools:text="This is the title" />
+
+</FrameLayout>

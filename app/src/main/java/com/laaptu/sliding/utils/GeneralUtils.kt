@@ -4,9 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import com.laaptu.sliding.R
-import com.laaptu.sliding.model.Deal
+import com.laaptu.sliding.model.Offer
 import android.util.DisplayMetrics
-import com.laaptu.sliding.MainApplication.Companion.context
 import com.laaptu.sliding.model.Story
 
 
@@ -23,12 +22,12 @@ fun getAllStories(): List<Story> {
             Story(4, R.drawable.story_transformation, "This is how we transformed"))
 }
 
-fun getAllOffers(): List<Deal> {
-    return listOf(Deal(1, R.drawable.offer_fast, "Get fastest internet speed at $5/month"),
-            Deal(2, R.drawable.offer_nat, "All nat geo channels for $1/week"),
-            Deal(3, R.drawable.offer_nbn, "Want to enjoy home internet with incredible speed"),
-            Deal(4, R.drawable.offer_business, "Want to get the best for your business"),
-            Deal(5, R.drawable.offer_sim, "Experience the double data explosion for your sim"))
+fun getAllOffers(): List<Offer> {
+    return listOf(Offer(1, R.drawable.offer_fast, "Get fastest internet speed at $5/month"),
+            Offer(2, R.drawable.offer_nat, "All nat geo channels for $1/week"),
+            Offer(3, R.drawable.offer_nbn, "Want to enjoy home internet with incredible speed"),
+            Offer(4, R.drawable.offer_business, "Want to get the best for your business"),
+            Offer(5, R.drawable.offer_sim, "Experience the double data explosion for your sim"))
 }
 
 fun getScreenWidthHeight(activity: Activity): IntArray {
