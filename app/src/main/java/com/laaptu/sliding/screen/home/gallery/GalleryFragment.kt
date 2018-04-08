@@ -10,6 +10,7 @@ import com.laaptu.sliding.R
 import com.laaptu.sliding.model.Story
 import com.laaptu.sliding.screen.home.DEAL_DATA
 import com.laaptu.sliding.screen.home.VIEW_STATE_GALLERY
+import com.laaptu.sliding.screen.home.gallery.StoryFragment.Companion.getDeal
 import com.laaptu.sliding.screen.home.gallery.widgets.OfferAdapter
 import com.laaptu.sliding.screen.home.gallery.widgets.OfferItemsSpace
 import com.laaptu.sliding.screen.home.gallery.widgets.StoriesAdapter
@@ -33,7 +34,7 @@ class GalleryFragment : Fragment() {
             return galleryFragment
         }
 
-        fun getDeal(params: Bundle?): ViewStateGallery {
+        fun getViewState(params: Bundle?): ViewStateGallery {
             if (params != null && params.containsKey(VIEW_STATE_GALLERY))
                 return params.getParcelable(VIEW_STATE_GALLERY)
             return ViewStateGallery()
@@ -47,7 +48,7 @@ class GalleryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-        viewStateGallery = getDeal(arguments)
+        viewStateGallery = getViewState(arguments)
     }
 
 
@@ -55,6 +56,12 @@ class GalleryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         bgButtons = listOf(btnRed, btnGreen, btnBlue)
+        bgButtons.forEachIndexed { index, btn ->
+            btn.setOnClickListener {
+                if (index != viewStateGallery.selectedColorIndex)
+                    changeBackground(index)
+            }
+        }
 
         val offerAdapter = OfferAdapter(getAllOffers())
         val layoutManager = LinearLayoutManager(context)
@@ -69,14 +76,27 @@ class GalleryFragment : Fragment() {
         val layoutParams = vpGallery.layoutParams
         layoutParams.height = newHeight
         vpGallery.adapter = StoriesAdapter(fragmentManager, getAllStories())
+
+        changeBackground(viewStateGallery.selectedColorIndex)
     }
 
     private fun changeBackground(btnColorIndex: Int) {
-        val colorButton = bgButtons[btnColorIndex]
+        val colorButton = getColorButton(btnColorIndex) ?: return
+        val prevSelectedButton = getColorButton(viewStateGallery.selectedColorIndex)
+        if (prevSelectedButton != null && viewStateGallery.selectedColorIndex != btnColorIndex)
+            prevSelectedButton.setChecked(false)
         colorButton.setChecked(true)
-        if (viewStateGallery.selectedColorIndex != NOT_SELECTED)
-            bgButtons[btnColorIndex].setChecked(false)
         parentLayout.setBackgroundColor(colorButton.getSelectedTextColor())
         viewStateGallery.selectedColorIndex = btnColorIndex
+    }
+
+    private fun getColorButton(index: Int): ColorButton? {
+        if (index >= 0 && index < bgButtons.size)
+            return bgButtons[index]
+        return null
+    }
+
+    fun getViewState(): ViewStateGallery {
+        return viewStateGallery
     }
 }
