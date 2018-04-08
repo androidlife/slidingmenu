@@ -56,8 +56,8 @@ class PlacesFragment : Fragment(), PlacesContract.View, AdapterView.OnItemSelect
         super.onViewCreated(view, savedInstanceState)
         loadedViews = listOf(spinnerPlaces, dividerFirst, txtTransportInfo, dividerSecond, btnLocation)
         spinnerPlaces.onItemSelectedListener = this
-        btnLocation.setOnClickListener { _ -> presenter.showMapIntent() }
-        txtInfo.setOnClickListener { _ -> presenter.retry() }
+        btnLocation.setOnClickListener { presenter.showMapIntent() }
+        txtInfo.setOnClickListener { presenter.retry() }
     }
 
 

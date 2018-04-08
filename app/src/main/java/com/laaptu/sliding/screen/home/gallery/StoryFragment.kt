@@ -35,5 +35,6 @@ class StoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val story = getStory(arguments) ?: return
         ivStory.setImageResource(story.imgResId)
+        ivStory.setOnClickListener { println(story.title) }
     }
 }
