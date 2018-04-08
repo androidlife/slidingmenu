@@ -5,8 +5,7 @@ import android.support.test.espresso.IdlingPolicies
 import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.laaptu.sliding.R
@@ -14,6 +13,7 @@ import com.laaptu.sliding.screen.home.HomeActivity
 import com.laaptu.sliding.utils.CustomIdlingResource
 import com.laaptu.sliding.utils.getScreenWidthHeight
 import com.laaptu.sliding.utils.nestedScrollVertically
+import com.laaptu.sliding.utils.openSlidingDrawer
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -45,7 +45,7 @@ class HomeActivityTest {
         }
     }
 
-    @Test
+    //@Test
     fun placesBgColorTest() {
         val screenWH = getScreenWidthHeight(activityTestRule.activity)
         onView(withId(R.id.nsvParent)).perform(nestedScrollVertically(screenWH[1] * 3))
@@ -57,6 +57,15 @@ class HomeActivityTest {
     private fun checkDisplayAndClick(id: Int) {
         onView(withId(id)).check(matches(isDisplayed()))
         onView(withId(id)).perform(click())
+    }
+
+    @Test
+    fun navigateToPlaces() {
+        onView(withId(R.id.drawerLayout)).perform(openSlidingDrawer())
+        val navigationTitle = activityTestRule.activity.getString(R.string.navigation)
+        onView(withText(navigationTitle)).check(matches(isDisplayed())).perform(click())
+        initIdlingResourceWithTimeOut(3, TimeUnit.SECONDS)
+        onView(withId(R.id.btnLocation)).check(matches(isDisplayed()))
     }
 
     private fun initIdlingResourceWithTimeOut(timeOut: Long, timeUnit: TimeUnit) {
