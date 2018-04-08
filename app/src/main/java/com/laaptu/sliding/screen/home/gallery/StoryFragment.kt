@@ -13,11 +13,11 @@ import kotlinx.android.synthetic.main.fragment_page.*
 class StoryFragment : Fragment() {
     companion object {
         fun getInstance(story: Story): StoryFragment {
-            val pagerFragment = StoryFragment()
+            val storyFragment = StoryFragment()
             val params = Bundle()
             params.putParcelable(DEAL_DATA, story)
-            pagerFragment.arguments = params
-            return pagerFragment
+            storyFragment.arguments = params
+            return storyFragment
         }
 
         fun getDeal(params: Bundle?): Story? {
