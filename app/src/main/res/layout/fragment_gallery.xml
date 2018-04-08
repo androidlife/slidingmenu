@@ -103,6 +103,47 @@
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/tvTitleOffer" />
 
+        <TextView
+            android:id="@+id/tvTitleColor"
+            style="@style/GalleryTitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/colors"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDetail" />
+
+        <Button
+            android:id="@+id/btnRed"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/gallery_item_top_margin"
+            android:text="Red"
+            android:textColor="@android:color/white"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btnGreen"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor" />
+
+        <Button
+            android:id="@+id/btnGreen"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/gallery_item_top_margin"
+            android:text="Green"
+            app:layout_constraintLeft_toRightOf="@+id/btnRed"
+            app:layout_constraintRight_toLeftOf="@+id/btnBlue"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor" />
+
+        <Button
+            android:id="@+id/btnBlue"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/gallery_item_top_margin"
+            android:text="Blue"
+            app:layout_constraintLeft_toRightOf="@+id/btnGreen"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor" />
+
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
