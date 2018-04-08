@@ -7,4 +7,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="offer_image_width">240dp</dimen>
     <dimen name="offer_image_height">95dp</dimen>
+
+    <dimen name="offer_item_space">2dp</dimen>
 </resources>

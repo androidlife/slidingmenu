@@ -4,7 +4,7 @@
 .idea/
 # Files for the ART/Dalvik VM
 *.dex
-
+.DS_Store
 # Java class files
 *.class
 

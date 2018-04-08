@@ -24,6 +24,7 @@ class GalleryFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         rvOffers.layoutManager = layoutManager
+        rvOffers.addItemDecoration(OfferItemsSpace(resources.getDimensionPixelSize(R.dimen.offer_item_space)))
         rvOffers.adapter = offerAdapter
 
 

@@ -2,4 +2,6 @@
 <resources>
     <dimen name="offer_image_width">290dp</dimen>
     <dimen name="offer_image_height">114dp</dimen>
+    <dimen name="offer_item_space">3dp</dimen>
+
 </resources>
