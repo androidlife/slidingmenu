@@ -10,10 +10,7 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.laaptu.sliding.R
 import com.laaptu.sliding.screen.home.HomeActivity
-import com.laaptu.sliding.utils.CustomIdlingResource
-import com.laaptu.sliding.utils.getScreenWidthHeight
-import com.laaptu.sliding.utils.nestedScrollVertically
-import com.laaptu.sliding.utils.openSlidingDrawer
+import com.laaptu.sliding.utils.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -45,7 +42,7 @@ class HomeActivityTest {
         }
     }
 
-    //@Test
+    @Test
     fun placesBgColorTest() {
         val screenWH = getScreenWidthHeight(activityTestRule.activity)
         onView(withId(R.id.nsvParent)).perform(nestedScrollVertically(screenWH[1] * 3))
@@ -58,7 +55,7 @@ class HomeActivityTest {
         onView(withId(id)).check(matches(isDisplayed())).perform(click())
     }
 
-    //@Test
+    @Test
     fun navigateToPlaces() {
         onView(withId(R.id.drawerLayout)).perform(openSlidingDrawer())
         val navigationTitle = activityTestRule.activity.getString(R.string.navigation)
@@ -74,6 +71,13 @@ class HomeActivityTest {
         onView(withId(R.id.btnLocation)).perform(click())
         initIdlingResourceWithTimeOut(2, TimeUnit.SECONDS)
         onView(withContentDescription("Google Map")).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun validatePlacesSelection() {
+        navigateToPlaces()
+        val text = selectItemOfSpinner(R.id.spinnerPlaces, 2)
+        onView(withText(text)).check(matches(isDisplayed()))
     }
 
     private fun initIdlingResourceWithTimeOut(timeOut: Long, timeUnit: TimeUnit) {
