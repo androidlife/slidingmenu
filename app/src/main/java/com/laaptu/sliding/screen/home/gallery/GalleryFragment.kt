@@ -16,9 +16,13 @@ import com.laaptu.sliding.screen.home.gallery.widgets.StoriesAdapter
 import com.laaptu.sliding.utils.getAllOffers
 import com.laaptu.sliding.utils.getAllStories
 import com.laaptu.sliding.utils.getScreenWidthHeight
+import com.laaptu.sliding.widgets.ColorButton
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
 class GalleryFragment : Fragment() {
+
+    private lateinit var viewStateGallery: ViewStateGallery
+    private lateinit var bgButtons: List<ColorButton>
 
     companion object {
         fun getInstance(viewStateGallery: ViewStateGallery): GalleryFragment {
@@ -40,8 +44,17 @@ class GalleryFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+        viewStateGallery = getDeal(arguments)
+    }
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        bgButtons = listOf(btnRed, btnGreen, btnBlue)
 
         val offerAdapter = OfferAdapter(getAllOffers())
         val layoutManager = LinearLayoutManager(context)
@@ -56,5 +69,14 @@ class GalleryFragment : Fragment() {
         val layoutParams = vpGallery.layoutParams
         layoutParams.height = newHeight
         vpGallery.adapter = StoriesAdapter(fragmentManager, getAllStories())
+    }
+
+    private fun changeBackground(btnColorIndex: Int) {
+        val colorButton = bgButtons[btnColorIndex]
+        colorButton.setChecked(true)
+        if (viewStateGallery.selectedColorIndex != NOT_SELECTED)
+            bgButtons[btnColorIndex].setChecked(false)
+        parentLayout.setBackgroundColor(colorButton.getSelectedTextColor())
+        viewStateGallery.selectedColorIndex = btnColorIndex
     }
 }

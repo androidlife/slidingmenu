@@ -39,10 +39,14 @@ class ColorButton : AppCompatButton {
         setChecked(false)
     }
 
-    private fun setChecked(selected: Boolean) {
+    fun setChecked(selected: Boolean) {
         when (selected) {
             true -> setTextColor(selectedTextColor)
             false -> setTextColor(defaultTextColor)
         }
+    }
+
+    fun getSelectedTextColor(): Int {
+        return selectedTextColor
     }
 }
