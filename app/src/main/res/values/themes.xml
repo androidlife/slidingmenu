@@ -17,5 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.HomeActionBar">
+        <item name="drawerArrowStyle">@style/HomeDrawerArrowToggle</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="HomeDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
 
 </resources>
