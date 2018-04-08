@@ -2,6 +2,7 @@ package com.laaptu.sliding.screen.home.gallery
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,8 @@ import com.laaptu.sliding.utils.getScreenWidthHeight
 import com.laaptu.sliding.widgets.ColorButton
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
-class GalleryFragment : Fragment() {
+class GalleryFragment : Fragment(), ViewPager.OnPageChangeListener {
+
 
     private lateinit var viewStateGallery: ViewStateGallery
     private lateinit var bgButtons: List<ColorButton>
@@ -55,6 +57,13 @@ class GalleryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        initViews()
+        changeBackground(viewStateGallery.selectedColorIndex)
+        if (viewStateGallery.selectedStoryIndex != NOT_SELECTED && viewStateGallery.selectedStoryIndex != vpGallery.currentItem)
+            vpGallery.currentItem = viewStateGallery.selectedStoryIndex
+    }
+
+    private fun initViews() {
         bgButtons = listOf(btnRed, btnGreen, btnBlue)
         bgButtons.forEachIndexed { index, btn ->
             btn.setOnClickListener {
@@ -76,9 +85,9 @@ class GalleryFragment : Fragment() {
         val layoutParams = vpGallery.layoutParams
         layoutParams.height = newHeight
         vpGallery.adapter = StoriesAdapter(fragmentManager, getAllStories())
-
-        changeBackground(viewStateGallery.selectedColorIndex)
+        vpGallery.addOnPageChangeListener(this)
     }
+
 
     private fun changeBackground(btnColorIndex: Int) {
         val colorButton = getColorButton(btnColorIndex) ?: return
@@ -94,6 +103,16 @@ class GalleryFragment : Fragment() {
         if (index >= 0 && index < bgButtons.size)
             return bgButtons[index]
         return null
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        viewStateGallery.selectedStoryIndex = position
     }
 
     fun getViewState(): ViewStateGallery {
