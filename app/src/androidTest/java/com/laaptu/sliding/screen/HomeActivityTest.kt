@@ -21,21 +21,21 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
+private const val TIMEOUT_ESPRESSO = 60L
+private val TIMEOUT_UNIT = TimeUnit.SECONDS
+
 @RunWith(AndroidJUnit4::class)
 class HomeActivityTest {
     @Rule
     @JvmField
     val activityTestRule = ActivityTestRule<HomeActivity>(HomeActivity::class.java)
 
-    private val TIMEOUT_ESPRESSO = 60
-    private val TIMEOUT_LOAD: Long = 5
-    private val TIMEOUT_UNIT = TimeUnit.SECONDS
 
     private var idlingResource: CustomIdlingResource? = null
 
     @Before
     fun setUp() {
-        IdlingPolicies.setMasterPolicyTimeout(TIMEOUT_ESPRESSO.toLong(), TIMEOUT_UNIT)
+        IdlingPolicies.setMasterPolicyTimeout(TIMEOUT_ESPRESSO, TIMEOUT_UNIT)
     }
 
     @After
@@ -55,17 +55,25 @@ class HomeActivityTest {
     }
 
     private fun checkDisplayAndClick(id: Int) {
-        onView(withId(id)).check(matches(isDisplayed()))
-        onView(withId(id)).perform(click())
+        onView(withId(id)).check(matches(isDisplayed())).perform(click())
     }
 
-    @Test
+    //@Test
     fun navigateToPlaces() {
         onView(withId(R.id.drawerLayout)).perform(openSlidingDrawer())
         val navigationTitle = activityTestRule.activity.getString(R.string.navigation)
+        initIdlingResourceWithTimeOut(500, TimeUnit.MILLISECONDS)
         onView(withText(navigationTitle)).check(matches(isDisplayed())).perform(click())
-        initIdlingResourceWithTimeOut(3, TimeUnit.SECONDS)
+        initIdlingResourceWithTimeOut(2, TimeUnit.SECONDS)
         onView(withId(R.id.btnLocation)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun navigateToMap() {
+        navigateToPlaces()
+        onView(withId(R.id.btnLocation)).perform(click())
+        initIdlingResourceWithTimeOut(2, TimeUnit.SECONDS)
+        onView(withContentDescription("Google Map")).check(matches(isDisplayed()))
     }
 
     private fun initIdlingResourceWithTimeOut(timeOut: Long, timeUnit: TimeUnit) {
