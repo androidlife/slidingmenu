@@ -2,21 +2,20 @@ package com.laaptu.sliding.screen.home
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.laaptu.sliding.R
+import com.laaptu.sliding.screen.home.gallery.GalleryFragment
 import com.laaptu.sliding.screen.home.places.PlacesFragment
 import com.laaptu.sliding.screen.home.places.ViewStatePlaces
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.home_content.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private var selectedIndex: Int = R.id.nav_location
+    private var selectedIndex: Int = R.id.nav_gallery
     private var viewStatePlaces = ViewStatePlaces()
 
     override fun onCreate(savedInstanceState: Bundle?) {

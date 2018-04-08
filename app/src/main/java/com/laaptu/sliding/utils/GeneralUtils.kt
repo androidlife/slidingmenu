@@ -8,3 +8,5 @@ fun isConnectedToNetwork(context: Context): Boolean {
     val networkInfo = connectivityManager.activeNetworkInfo
     return networkInfo != null && networkInfo.isConnectedOrConnecting
 }
+
+
