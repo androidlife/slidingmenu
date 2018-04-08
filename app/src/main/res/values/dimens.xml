@@ -9,4 +9,7 @@
     <dimen name="offer_image_height">95dp</dimen>
 
     <dimen name="offer_item_space">2dp</dimen>
+    <dimen name="gallery_item_top_margin">4dp</dimen>
+    <dimen name="gallery_item_left_right_margin">8dp</dimen>
+    <dimen name="perk_text_height">60dp</dimen>
 </resources>

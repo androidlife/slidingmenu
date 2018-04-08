@@ -12,4 +12,11 @@
     <string name="mode_car">Car</string>
     <string name="mode_train">Train</string>
     <string name="tap_to_retry">Tap to Retry!</string>
+    <string name="stories">Stories</string>
+    <string name="discount_movie_tickets">Discount Movie Tickets</string>
+    <string name="_15_off_with_experience_oz">15% off with Experience OZ</string>
+    <string name="win_a_trip_to_iceland">Win a trip to Iceland</string>
+    <string name="offer_details">Offer Details</string>
+    <string name="perks">Perks</string>
+    <string name="select_an_offer_to_view_its_detail">Select an offer to view its detail</string>
 </resources>

@@ -5,5 +5,10 @@
     <color name="colorAccent">#00BCD4</color>
     <color name="black_70">#77010101</color>
     <color name="divider">#C7C7C7</color>
+    <color name="black">@android:color/black</color>
+
+    <color name="bg_red">#77fa0800</color>
+    <color name="bg_blue">#aa3f51b5</color>
+    <color name="bg_green">#aa4caf50</color>
 
 </resources>
