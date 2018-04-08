@@ -7,8 +7,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import au.com.sentia.test.utils.events.RxBus
 import com.laaptu.sliding.R
 import com.laaptu.sliding.screen.home.VIEW_STATE_GALLERY
+import com.laaptu.sliding.screen.home.gallery.events.EventOfferClick
 import com.laaptu.sliding.screen.home.gallery.widgets.OfferAdapter
 import com.laaptu.sliding.screen.home.gallery.widgets.OfferItemsSpace
 import com.laaptu.sliding.screen.home.gallery.widgets.StoriesAdapter
@@ -16,6 +18,7 @@ import com.laaptu.sliding.utils.getAllOffers
 import com.laaptu.sliding.utils.getAllStories
 import com.laaptu.sliding.utils.getScreenWidthHeight
 import com.laaptu.sliding.widgets.ColorButton
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
 class GalleryFragment : Fragment(), ViewPager.OnPageChangeListener {
@@ -23,6 +26,8 @@ class GalleryFragment : Fragment(), ViewPager.OnPageChangeListener {
 
     private lateinit var viewStateGallery: ViewStateGallery
     private lateinit var bgButtons: List<ColorButton>
+    private lateinit var clickListener: Disposable
+    private val offers = getAllOffers()
 
     companion object {
         fun getInstance(viewStateGallery: ViewStateGallery): GalleryFragment {
@@ -58,6 +63,8 @@ class GalleryFragment : Fragment(), ViewPager.OnPageChangeListener {
         changeBackground(viewStateGallery.selectedColorIndex)
         if (viewStateGallery.selectedStoryIndex != NOT_SELECTED && viewStateGallery.selectedStoryIndex != vpGallery.currentItem)
             vpGallery.currentItem = viewStateGallery.selectedStoryIndex
+        onOfferSelected(viewStateGallery.selectedOfferIndex)
+
     }
 
     private fun initViews() {
@@ -69,7 +76,7 @@ class GalleryFragment : Fragment(), ViewPager.OnPageChangeListener {
             }
         }
 
-        val offerAdapter = OfferAdapter(getAllOffers())
+        val offerAdapter = OfferAdapter(offers)
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         rvOffers.layoutManager = layoutManager
@@ -114,5 +121,36 @@ class GalleryFragment : Fragment(), ViewPager.OnPageChangeListener {
 
     fun getViewState(): ViewStateGallery {
         return viewStateGallery
+    }
+
+    override fun onStart() {
+        super.onStart()
+        listenToClickEvents(true)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        listenToClickEvents(false)
+    }
+
+    private fun listenToClickEvents(listen: Boolean) {
+        when (listen) {
+            true -> clickListener = RxBus.toObservable().subscribe { event -> onClickEvent(event) }
+            false -> if (clickListener != null) clickListener.dispose()
+        }
+    }
+
+    private fun onClickEvent(event: Any) {
+        if (event is EventOfferClick)
+            onOfferSelected(event.index)
+
+    }
+
+    private fun onOfferSelected(index: Int) {
+        if (index < 0 || index >= offers.size)
+            return
+        tvDetail.text = offers[index].title
+        viewStateGallery.selectedOfferIndex = index
+        rvOffers.scrollToPosition(index)
     }
 }
