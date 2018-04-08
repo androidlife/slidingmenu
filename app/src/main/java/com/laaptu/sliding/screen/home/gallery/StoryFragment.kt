@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.laaptu.sliding.R
 import com.laaptu.sliding.model.Story
 import com.laaptu.sliding.screen.home.DEAL_DATA
-import kotlinx.android.synthetic.main.fragment_page.*
+import kotlinx.android.synthetic.main.fragment_story.*
 
 class StoryFragment : Fragment() {
     companion object {
@@ -20,7 +20,7 @@ class StoryFragment : Fragment() {
             return storyFragment
         }
 
-        fun getDeal(params: Bundle?): Story? {
+        fun getStory(params: Bundle?): Story? {
             if (params != null && params.containsKey(DEAL_DATA))
                 return params.getParcelable(DEAL_DATA)
             return null
@@ -28,12 +28,12 @@ class StoryFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_page, container, false)
+        return inflater.inflate(R.layout.fragment_story, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val deal = getDeal(arguments) ?: return
-        ivDeal.setImageResource(deal.imgResId)
+        val story = getStory(arguments) ?: return
+        ivStory.setImageResource(story.imgResId)
     }
 }

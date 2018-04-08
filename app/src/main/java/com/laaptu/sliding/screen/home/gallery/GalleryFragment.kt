@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.laaptu.sliding.R
-import com.laaptu.sliding.model.Story
-import com.laaptu.sliding.screen.home.DEAL_DATA
 import com.laaptu.sliding.screen.home.VIEW_STATE_GALLERY
-import com.laaptu.sliding.screen.home.gallery.StoryFragment.Companion.getDeal
 import com.laaptu.sliding.screen.home.gallery.widgets.OfferAdapter
 import com.laaptu.sliding.screen.home.gallery.widgets.OfferItemsSpace
 import com.laaptu.sliding.screen.home.gallery.widgets.StoriesAdapter
