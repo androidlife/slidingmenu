@@ -39,7 +39,7 @@ class HomeActivityTest {
     }
 
     @After
-    fun onTestComplete() {
+    fun clearIdlingResource() {
         if (idlingResource != null) {
             IdlingRegistry.getInstance().unregister(idlingResource)
         }
@@ -60,7 +60,7 @@ class HomeActivityTest {
     }
 
     private fun initIdlingResourceWithTimeOut(timeOut: Long, timeUnit: TimeUnit) {
-        onTestComplete()
+        clearIdlingResource()
         idlingResource = CustomIdlingResource()
         IdlingRegistry.getInstance().register(idlingResource)
         idlingResource?.startCountdown(timeOut, timeUnit)
