@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.laaptu.sliding.R
+import com.laaptu.sliding.screen.home.gallery.widgets.OfferAdapter
+import com.laaptu.sliding.screen.home.gallery.widgets.OfferItemsSpace
+import com.laaptu.sliding.screen.home.gallery.widgets.StoriesAdapter
 import com.laaptu.sliding.utils.getAllOffers
 import com.laaptu.sliding.utils.getAllStories
 import com.laaptu.sliding.utils.getScreenWidthHeight

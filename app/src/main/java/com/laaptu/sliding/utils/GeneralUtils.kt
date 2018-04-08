@@ -16,18 +16,18 @@ fun isConnectedToNetwork(context: Context): Boolean {
 }
 
 fun getAllStories(): List<Story> {
-    return listOf(Story(1, R.drawable.story_cloud, "Read cloud services"),
-            Story(2, R.drawable.story_customer, "Wanna know customer feedback"),
-            Story(3, R.drawable.story_success, "Here is our success story"),
-            Story(4, R.drawable.story_transformation, "This is how we transformed"))
+    return listOf(Story(0, R.drawable.story_cloud, "Read cloud services"),
+            Story(1, R.drawable.story_customer, "Wanna know customer feedback"),
+            Story(2, R.drawable.story_success, "Here is our success story"),
+            Story(3, R.drawable.story_transformation, "This is how we transformed"))
 }
 
 fun getAllOffers(): List<Offer> {
-    return listOf(Offer(1, R.drawable.offer_fast, "Get fastest internet speed at $5/month"),
-            Offer(2, R.drawable.offer_nat, "All nat geo channels for $1/week"),
-            Offer(3, R.drawable.offer_nbn, "Want to enjoy home internet with incredible speed"),
-            Offer(4, R.drawable.offer_business, "Want to get the best for your business"),
-            Offer(5, R.drawable.offer_sim, "Experience the double data explosion for your sim"))
+    return listOf(Offer(0, R.drawable.offer_fast, "Get fastest internet speed at $5/month"),
+            Offer(1, R.drawable.offer_nat, "All nat geo channels for $1/week"),
+            Offer(2, R.drawable.offer_nbn, "Want to enjoy home internet with incredible speed"),
+            Offer(3, R.drawable.offer_business, "Want to get the best for your business"),
+            Offer(4, R.drawable.offer_sim, "Experience the double data explosion for your sim"))
 }
 
 fun getScreenWidthHeight(activity: Activity): IntArray {

@@ -112,37 +112,42 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDetail" />
 
-        <Button
+        <com.laaptu.sliding.widgets.ColorButton
             android:id="@+id/btnRed"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="@dimen/gallery_item_top_margin"
-            android:text="Red"
-            android:textColor="@android:color/white"
+            android:text="@string/red"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btnGreen"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor"
+            app:text_color_default="@android:color/white"
+            app:text_color_selected="@color/bg_red" />
 
-        <Button
+        <com.laaptu.sliding.widgets.ColorButton
             android:id="@+id/btnGreen"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="@dimen/gallery_item_top_margin"
-            android:text="Green"
+            android:text="@string/green"
             app:layout_constraintLeft_toRightOf="@+id/btnRed"
             app:layout_constraintRight_toLeftOf="@+id/btnBlue"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor"
+            app:text_color_default="@android:color/white"
+            app:text_color_selected="@color/bg_green" />
 
-        <Button
+        <com.laaptu.sliding.widgets.ColorButton
             android:id="@+id/btnBlue"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="@dimen/gallery_item_top_margin"
-            android:text="Blue"
+            android:text="@string/blue"
             app:layout_constraintLeft_toRightOf="@+id/btnGreen"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor"
+            app:text_color_default="@android:color/white"
+            app:text_color_selected="@color/bg_blue" />
 
 
     </android.support.constraint.ConstraintLayout>

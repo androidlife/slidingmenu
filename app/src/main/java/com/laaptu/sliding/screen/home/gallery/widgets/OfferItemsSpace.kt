@@ -1,4 +1,4 @@
-package com.laaptu.sliding.screen.home.gallery
+package com.laaptu.sliding.screen.home.gallery.widgets
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
